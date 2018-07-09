@@ -84,6 +84,7 @@ app.post('/login', function(req, res) {
 });
 
 app.get('/categories', authChecker, function(req, res) {
+	console.log("here");
 	res.json(categories.filter(function(element) {
 		return element.parentId == null;
 	}));

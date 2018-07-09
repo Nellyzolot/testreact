@@ -22,7 +22,7 @@ export const routes = (
         <Route path='/' component={App}>
           <IndexRoute component={Forms} />
           <Route path='/signup' component={RegForm} />
-          <Route path='/signin' component={AutoForm} onEnter={AutoForm.onEnter()} />
+          <Route path='/signin' component={AutoForm} />
           <Route path='/categories' component={Categories}>
             <Route path='/categories/:id' component={Category} />
           </Route>

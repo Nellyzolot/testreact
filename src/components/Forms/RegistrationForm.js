@@ -11,22 +11,17 @@ class RegForm extends Component {
   handleSubmit = event => {
       event.preventDefault();
       this.disableInput();
-          var body = {
-             login: ReactDOM.findDOMNode(this.refs.login).value,
-             password: ReactDOM.findDOMNode(this.refs.password).value
-          }
 
-          axios({
-                method: 'post',
-                url: '/signup',
-                data: body
-              })
-              .then(function (response) {
-                console.log(response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-              });
+      axios.post('/signup', {
+        login: ReactDOM.findDOMNode(this.refs.login).value,
+        password: ReactDOM.findDOMNode(this.refs.password).value
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   disableInput(){
