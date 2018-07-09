@@ -1,52 +1,38 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactDOM from "react-dom";
 
 class RegForm extends Component {
 
-constructor(props) {
-    super(props);
-    this.handleLoginChange = this.handleLoginChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.disableInput = this.disableInput.bind(this);
-    this.state = {
-      login:'',
-      password:''
-    };
+  constructor(props) {
+      super(props);
+  }
 
-}
+  handleSubmit = event => {
+      event.preventDefault();
+      this.disableInput();
+          var body = {
+             login: ReactDOM.findDOMNode(this.refs.login).value,
+             password: ReactDOM.findDOMNode(this.refs.password).value
+          }
 
-handleSubmit = event => {
-    event.preventDefault();
-    this.disableInput();
-        var body = {
-           login: this.state.login,
-           password: this.state.password
-        }
-
-        axios({
-              method: 'post',
-              url: '/signup',
-              data: body
-            })
-            .then(function (response) {
-              console.log(response);
+          axios({
+                method: 'post',
+                url: '/signup',
+                data: body
               })
-              .catch(function (error) {
-                console.log(error);
-            });
-}
+              .then(function (response) {
+                console.log(response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+              });
+  }
 
-disableInput(){
-  this.textInput1.disabled = true;
-  this.textInput2.disabled = true;
-}
-
-handleLoginChange(e){
-    this.setState({login:e.target.value})
-}
-handlePasswordChange(e){
-    this.setState({password:e.target.value})
-}   
+  disableInput(){
+    ReactDOM.findDOMNode(this.refs.login).disabled = true;
+    ReactDOM.findDOMNode(this.refs.password).disabled = true;
+  }
 
   render() {
     return (
@@ -56,8 +42,8 @@ handlePasswordChange(e){
             <input
                 name="login"
                 type="text"
-                ref={(input) => { this.textInput1 = input; }}
-                onChange={this.handleLoginChange}
+                defaultValue=''
+                ref='login'
                 placeholder="Введите логин"
             />
           </div>
@@ -65,8 +51,8 @@ handlePasswordChange(e){
     			  <input
                 name="password"
                 type="password"
-                ref={(input) => { this.textInput2 = input; }}
-                onChange={this.handlePasswordChange}
+                defaultValue=''
+                ref='password'
                 placeholder="Введите пароль"
             />
           </div>

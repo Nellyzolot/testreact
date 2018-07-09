@@ -1,46 +1,36 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 
 class AutoForm extends Component {
+  static onEnter() {
+  console.log("111");
+  }
 
-constructor(props) {
-    super(props);
-    this.handleLoginChange = this.handleLoginChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.state = {
-      login:'',
-      password:''
-    };
-}
+  constructor(props) {
+      super(props);
+  }
 
-handleSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
+      var body = {
+         login: ReactDOM.findDOMNode(this.refs.login).value,
+         password: ReactDOM.findDOMNode(this.refs.password).value
+      }
 
-        var body = {
-           login: this.state.login,
-           password: this.state.password
-        }
-
-        axios({
-              method: 'post',
-              url: '/login',
-              data: body
-            })
-            .then(function (response) {
-                console.log(response.data);
-              })
-              .catch(function (error) {
-                console.log(error);
-            });
-}
-
-handleLoginChange(e){
-    this.setState({login:e.target.value})
-}
-handlePasswordChange(e){
-    this.setState({password:e.target.value})
-}   
+      axios({
+        method: 'post',
+        url: '/login',
+        data: body
+      })
+      .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+      });
+  }
 
   render() {
     return (
@@ -50,7 +40,8 @@ handlePasswordChange(e){
             <input
                 name="login"
                 type="text"
-                onChange={this.handleLoginChange}
+                defaultValue=''
+                ref='login'
                 placeholder="Введите логин"
             />
           </div>
@@ -58,7 +49,8 @@ handlePasswordChange(e){
             <input
                 name="password"
                 type="password"
-                onChange={this.handlePasswordChange}
+                defaultValue=''
+                ref='password'
                 placeholder="Введите пароль"
             />
           </div>
