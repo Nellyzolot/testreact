@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import RegForm from './Forms/RegistrationForm'
-import AutoForm from './Forms/AutorisationForm'
+import LoginForm from './Forms/LoginForm'
 
 class Forms extends Component {
   // onYearBtnClick(event) {
@@ -30,7 +30,7 @@ class Forms extends Component {
         </div>
         <div className="autorisation">
           Уже есть аккаунт?
-          <AutoForm />
+          <LoginForm />
         </div>
       </div>
     );

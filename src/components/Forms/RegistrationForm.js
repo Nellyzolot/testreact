@@ -16,12 +16,6 @@ class RegForm extends Component {
         login: ReactDOM.findDOMNode(this.refs.login).value,
         password: ReactDOM.findDOMNode(this.refs.password).value
       })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   disableInput(){

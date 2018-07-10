@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import * as LoginAction from '../../actions/LoginAction'
 import axios from 'axios';
-import Products from '../Products/Products'
-
 
 class AutoForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      sid: ''
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleSubmit = event => {
@@ -23,17 +20,10 @@ class AutoForm extends Component {
       password: ReactDOM.findDOMNode(this.refs.password).value
     })
     .then(response => {
-        this.setState({sid: response.data.sid});
+        this.props.actions.login({sid: response.data.sid})
       }
     )
 
-    //browserHistory.push('/products')
-  };
-
-  handleClick = event => {
-    console.log(this.state.sid);
-    axios.get('/categories')
-        .then(response => console.log(response))
   };
 
   render() {
@@ -58,14 +48,21 @@ class AutoForm extends Component {
                 placeholder="Введите пароль"
             />
           </div>
-          <button className="login-button button" onClick={this.handleSubmit} >Войти</button>
+          <button className="login-button button" >Войти</button>
     		</form>
-        <p>{this.state.sid}</p>
-        <button className="login-button button" onClick={this.handleClick}>
-        </button>
   		</div>	
     );
   }
 }
 
-export default AutoForm;
+function mapStateToProps() {
+  return {}
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(LoginAction, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AutoForm);

@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
+import axios from "axios/index";
 
 class Categories extends Component {
+  componentWillMount() {
+    axios.get('/categories', {
+      headers: {
+        'sid': 123
+      }
+    })
+        .then(response => console.log(response.data))
+  }
+
   render() {
     return (
         <div className='row'>
-          <h3 className='col-md-12'>{this.props.params.categoryId}</h3>
-          <div className='col-md-12'>Здесь будет список релизов</div>
+          Категории
         </div>
     )
   }
