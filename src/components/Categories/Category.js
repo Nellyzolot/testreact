@@ -1,13 +1,22 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux';
 
 class Category extends Component {
+
   render() {
-    return (
-        <div className='col-md-12'>
-          this.props.params.release
-        </div>
-    )
+    console.log(this.props.data);
+    return <div>
+      <div>{/*Object.keys(this.props.data).map(item => (
+          <p key={item.id}>Hello, {item.title} !</p>
+      ))*/}</div>
+    </div>
   }
 }
 
-export default Category;
+function mapStateToProps(state) {
+  return {
+    data: state.data
+  }
+}
+
+export default connect(mapStateToProps, )(Category);

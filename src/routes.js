@@ -4,7 +4,7 @@ import { Route, IndexRoute} from 'react-router'
 import App from './container/App'
 import Forms from './components/Forms'
 import RegForm from './components/Forms/RegistrationForm'
-import AutoForm from './components/Forms/LoginForm'
+import LoginForm from './components/Forms/LoginForm'
 import Products from './components/Products/Products'
 import Product from './components/Products/Product'
 import Categories from './components/Categories/Categories'
@@ -22,7 +22,7 @@ export const routes = (
         <Route path='/' component={App}>
           <IndexRoute component={Forms} />
           <Route path='/signup' component={RegForm} />
-          <Route path='/signin' component={AutoForm} />
+          <Route path='/signin' component={LoginForm} />
           <Route path='/categories' component={Categories}>
             <Route path='/categories/:id' component={Category} />
           </Route>

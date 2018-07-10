@@ -8,7 +8,6 @@ import {
 
 export function login(payload) {
   return (dispatch) => {
-
       dispatch({
         type: SET_SID,
         payload: {

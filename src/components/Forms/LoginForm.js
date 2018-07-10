@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import * as LoginAction from '../../actions/LoginAction'
 import axios from 'axios';
 
-class AutoForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,4 +64,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AutoForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

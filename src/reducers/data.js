@@ -1,17 +1,17 @@
 import {
-  SET_SID
-} from '../constants/Login'
+  GET_DATA
+} from '../constants/Data'
 
 const initialState = {
-  sid: '',
+  data: {},
 };
 
 export default function (state = initialState, action) {
 
   switch (action.type) {
 
-    case SET_SID:
-      return Object.assign({}, state, {sid: action.payload.sid});
+    case GET_DATA:
+      return Object.assign({}, state, {data: action.payload.data});
 
     default:
       return state;
