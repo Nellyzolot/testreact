@@ -19,7 +19,7 @@ export function login(payload) {
         type: ROUTING,
         payload: {
           method: 'push',
-          nextUrl: '/categories'
+          nextUrl: '/getcategory'
         }
       })
   }

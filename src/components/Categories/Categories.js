@@ -1,46 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {bindActionCreators} from "redux";
-import * as DataAction from "../../actions/DataAction";
-import axios from "axios";
-import Category from "./Category"
+import CategoryItem from './CategotyItem'
 
 class Categories extends Component {
 
-  componentWillMount() {
-    const { sid } = this.props.login;
-    axios.get('/categories', {
-      headers: {
-        'sid': sid
-      }
-    })
-        .then(response =>
-            this.props.actions.getData({data: response.data})
-        )
+  handleClick() {
+    return <CategoryItem/>
   }
 
   render() {
+    const categoryItems = this.props.categories.categories.map((dataItem) =>
+        <li key={dataItem.id.toString()} onClick={this.handleClick.bind(this)}>{dataItem.title}</li>,
+        this
+    );
+    return <div>
+          Категория
+        <ul>
+          { categoryItems }
+        </ul>
 
-    return (
-        <div className='row'>
-          Категории
-          <Category/>
-        </div>
-    )
+    </div>
   }
 }
 
 function mapStateToProps(state) {
   return {
-    login: state.login,
-    data: state.data
+    categories: state.categories
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(DataAction, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps)(Categories);
