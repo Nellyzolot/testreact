@@ -18,6 +18,7 @@ export function getSubCategories(payload) {
       type: actions.GET_SUBCATEGORIES,
       payload: {
         subCategories: payload.subCategories,
+        currentIdCat: payload.currentIdCat,
       }
     });
   }
@@ -29,6 +30,7 @@ export function getProducts(payload) {
       type: actions.GET_PRODUCTS,
       payload: {
         products: payload.products,
+        currentIdSub: payload.currentIdSub,
       }
     });
   }

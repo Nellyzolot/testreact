@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
-import * as LoginAction from '../../actions/LoginAction'
 import axios from 'axios';
 
 class LoginForm extends Component {
-  constructor(props) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this);
+  static propTypes = {
+    sid: PropTypes.number.isRequired,
+    setSid: PropTypes.func.isRequired,
   }
 
   handleSubmit = event => {
+    const { setSid } = this.props;
     event.preventDefault();
 
     axios.post('/login', {
@@ -19,7 +17,7 @@ class LoginForm extends Component {
       password: ReactDOM.findDOMNode(this.refs.password).value
     })
     .then(response => {
-        this.props.actions.setSid({sid: response.data.sid})
+        setSid({sid: response.data.sid})
       }
     )
 
@@ -28,7 +26,7 @@ class LoginForm extends Component {
   render() {
     return (
     	<div className = "autorisation-form">
-    		<form onSubmit={this.handleSubmit}>
+    		<form onSubmit={this.handleSubmit.bind(this)}>
           <div className="textfield">
             <input
                 name="login"
@@ -53,15 +51,4 @@ class LoginForm extends Component {
     );
   }
 }
-
-function mapStateToProps() {
-  return {}
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(LoginAction, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default LoginForm;

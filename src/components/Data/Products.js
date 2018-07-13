@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
 
 class Products extends Component {
   render() {
-    return <div className="subcategories">
-      <ul className="subcategories__list">
-        {this.props.products.products.map((dataItem) => (
-            <div className={"subcategories__list-title"} key={dataItem.id.toString()} >
+    const { products } = this.props
+    console.log(products[0].categoryId)
+    return <div className="products">
+      <ul className="products__list">
+        {products.map((dataItem) => (
+            <div className={"products__list-title"} key={dataItem.id.toString()} >
               <li
-                  id={dataItem.id.toString()}
-                  onClick = {() => this.handleClick(dataItem.id.toString())}>
+                  id={dataItem.id.toString()}>
                 {dataItem.title}
               </li>
             </div>
@@ -19,11 +19,4 @@ class Products extends Component {
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    products: state.dataReducer
-  }
-}
-
-export default connect(mapStateToProps)(Products);
+export default Products;

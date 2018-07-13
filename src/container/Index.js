@@ -1,50 +1,24 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as CategoriesAction from '../actions/DataAction';
-import axios from 'axios';
-import Categories from "../components/Data/Categories";
+import {getCategories, getSubCategories, getProducts} from '../actions/DataAction';
+import DataIndex from '../components/Data/DataIndex';
 
-class GetCategories extends Component {
+const mapStateToProps = state => ({
+  sid: state.loginReducer.sid,
+  currentIdCat:state.dataReducer.currentIdCat,
+  currentIdSub:state.dataReducer.currentIdSub,
+  categories: state.dataReducer.categories,
+  subCategories:state.dataReducer.subCategories,
+  products:state.dataReducer.products,
+  isFetchingCat: state.dataReducer.isFetchingCat,
+  isFetchingSub: state.dataReducer.isFetchingSub,
+  isFetchingProd: state.dataReducer.isFetchingProd
+});
 
-  componentWillMount() {
-    const { sid } = this.props.login;
-    axios.get('/categories', {
-      headers: {
-        'sid': sid
-      }
-    })
-        .then(response => {
-              this.props.actions.getCategories({categories: response.data});
-            }
-        )
-  }
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCategories,
+  getSubCategories,
+  getProducts
+}, dispatch);
 
-  render() {
-    const { isFetching } = this.props.categories;
-    return (
-        <div>
-          {!isFetching ?
-              <Categories/>
-              :
-              <p>Loading...</p>
-          }
-        </div>
-    )
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    login: state.loginReducer,
-    categories: state.dataReducer
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(CategoriesAction, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GetCategories);
+export default connect(mapStateToProps, mapDispatchToProps)(DataIndex);
