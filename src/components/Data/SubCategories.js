@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import {connect} from "react-redux";
 
 class SubCategories extends Component {
-
   render() {
+    const { subCategories } = this.props
     return <div className="subcategories">
       <ul className="subcategories__list">
-        {this.props.subCategories.subCategories.map((dataItem) => (
+        {subCategories.map((dataItem) => (
             <div className={"subcategories__list-title"} key={dataItem.id.toString()} >
               <li
                   id={dataItem.id.toString()}
@@ -20,10 +19,4 @@ class SubCategories extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    subCategories: state.dataReducer
-  }
-}
-
-export default connect(mapStateToProps)(SubCategories);
+export default SubCategories;
