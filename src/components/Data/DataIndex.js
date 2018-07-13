@@ -81,7 +81,7 @@ class DataIndex extends Component {
                               <ul className="subcategories__list">
                                 {subCategories.map((dataItem) => (
                                     <div
-                                        className={"subcategories__list-title"+dataItem.id}
+                                        className={"subcategories__list-title"}
                                         key={dataItem.id}>
                                       <li id={dataItem.id}
                                           onClick = {() => this.getProducts(dataItem.id)}>
@@ -93,7 +93,7 @@ class DataIndex extends Component {
                                             {console.log(currentIdSub)}
                                           </div>
                                           :
-                                          <p>Loading...</p>
+                                          null
                                       }
                                     </div>
                                 ))}
@@ -102,7 +102,7 @@ class DataIndex extends Component {
                               null}
                             </div>
                             :
-                            <p>Loading...</p>
+                            null
                         }
                       </div>
                   ))}

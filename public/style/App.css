@@ -79,10 +79,22 @@ body {
   color: #fff;
 }
 
-.hidden{
-  display:none;
+ul {
+  list-style: none;
 }
 
-.visible{
-  display:block;
+
+.categories__list-title > li{
+  font-size: 20px;
+  padding: 10px;
+}
+
+.subcategories__list-title > li {
+  font-size: 18px;
+  padding: 5px;
+  margin-left:20px;
+}
+
+.products__list-title > li {
+  margin-left:50px;
 }
