@@ -19,7 +19,7 @@ class LoginForm extends Component {
       password: ReactDOM.findDOMNode(this.refs.password).value
     })
     .then(response => {
-        this.props.actions.login({sid: response.data.sid})
+        this.props.actions.setSid({sid: response.data.sid})
       }
     )
 

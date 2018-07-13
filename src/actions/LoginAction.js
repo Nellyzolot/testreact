@@ -6,7 +6,7 @@ import {
   ROUTING
 } from '../constants/Routing'
 
-export function login(payload) {
+export function setSid(payload) {
   return (dispatch) => {
       dispatch({
         type: SET_SID,
@@ -19,7 +19,7 @@ export function login(payload) {
         type: ROUTING,
         payload: {
           method: 'push',
-          nextUrl: '/getcategory'
+          nextUrl: '/index'
         }
       })
   }

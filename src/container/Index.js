@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as CategoriesAction from '../../actions/CategoriesAction';
+import * as CategoriesAction from '../actions/DataAction';
 import axios from 'axios';
-import Categories from "./Categories";
+import Categories from "../components/Data/Categories";
 
 class GetCategories extends Component {
 
@@ -14,19 +14,19 @@ class GetCategories extends Component {
         'sid': sid
       }
     })
-    .then(response => {
-          this.props.actions.getCategories({categories: response.data});
-        }
-    )
+        .then(response => {
+              this.props.actions.getCategories({categories: response.data});
+            }
+        )
   }
 
   render() {
     const { isFetching } = this.props.categories;
     return (
         <div>
-          {isFetching ?
+          {!isFetching ?
               <Categories/>
-          :
+              :
               <p>Loading...</p>
           }
         </div>
@@ -36,8 +36,8 @@ class GetCategories extends Component {
 
 function mapStateToProps(state) {
   return {
-    login: state.login,
-    categories: state.categories
+    login: state.loginReducer,
+    categories: state.dataReducer
   }
 }
 

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import login from './login'
-import categories from './categories'
+import loginReducer from './loginReducer'
+import dataReducer from './dataReducer'
 
 export default combineReducers({
-  login,
-  categories
+  loginReducer,
+  dataReducer
 })

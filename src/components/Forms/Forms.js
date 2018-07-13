@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import RegForm from './Forms/RegistrationForm'
-import LoginForm from './Forms/LoginForm'
+import RegForm from './RegistrationForm'
+import LoginForm from './LoginForm'
 
 class Forms extends Component {
   render() {

@@ -3,7 +3,7 @@ import {
 } from '../constants/Login'
 
 const initialState = {
-  sid: '',
+  sid: 0,
 };
 
 export default function (state = initialState, action) {
