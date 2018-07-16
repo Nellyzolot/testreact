@@ -88,7 +88,7 @@ class DataIndex extends Component {
                                         {dataItem.title}
                                       </li>
                                       {!isFetchingProd ?
-                                          <div>
+                                          <div className="products">
                                             {(dataItem.id === currentIdSub) ? <Products products={products}/> : null}
                                             {console.log(currentIdSub)}
                                           </div>
