@@ -1,25 +1,20 @@
 import React, { PropTypes, Component } from 'react'
-import axios from 'axios';
-import Products from './Products'
+import axios from 'axios'
+import classNames from 'classnames'
+import SubCategories from '../../container/SubCategories'
 
 class DataIndex extends Component {
   static propTypes = {
     sid: PropTypes.number.isRequired,
     currentIdCat: PropTypes.number.isRequired,
-    currentIdSub: PropTypes.number.isRequired,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
     subCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
-    products: PropTypes.arrayOf(PropTypes.object).isRequired,
-    getSubCategories: PropTypes.func.isRequired,
     getCategories: PropTypes.func.isRequired,
-    getProducts: PropTypes.func.isRequired,
+    getSubCategories: PropTypes.func.isRequired,
     isFetchingCat: PropTypes.bool.isRequired,
-    isFetchingSub: PropTypes.bool.isRequired,
-    isFetchingProd: PropTypes.bool.isRequired
   };
 
   componentWillMount() {
-    console.log(this.props)
     const { sid, getCategories } = this.props;
     axios.get('/categories', {
       headers: {
@@ -32,7 +27,7 @@ class DataIndex extends Component {
         )
   };
 
-  getSubcategories = (id) => {
+  getSubcategories = (id, check) => {
     const { sid, getSubCategories } = this.props;
     axios.get('/categories/' + id, {
       headers: {
@@ -43,24 +38,12 @@ class DataIndex extends Component {
               getSubCategories({subCategories: response.data, currentIdCat: id});
             }
         )
-  };
-
-  getProducts = (id) => {
-    const { sid, getProducts } = this.props;
-    axios.get('/products/' + id, {
-      headers: {
-        'sid': sid
-      }
-    })
-        .then(response => {
-              getProducts({products: response.data, currentIdSub: id});
-            }
-        )
-
+    this.check = true;
   };
 
   render() {
-    const { isFetchingCat, isFetchingSub, isFetchingProd, currentIdCat, currentIdSub, categories, subCategories, products } = this.props;
+    const { isFetchingCat, currentIdCat, categories, subCategories } = this.props;
+    let check = false;
     return (
         <div>
           {!isFetchingCat ?
@@ -68,42 +51,13 @@ class DataIndex extends Component {
                 <ul className="categories__list">
                   {categories.map((dataItem) => (
                       <div
-                          className={"categories__list-title"}
+                          className={classNames("categories__list-title", { "categories__list-title_active" : dataItem.id === currentIdCat})}
                           key={dataItem.id}>
                         <li id={dataItem.id}
-                            onClick = {() => this.getSubcategories(dataItem.id)}>
+                            onClick = {() => this.getSubcategories(dataItem.id, check)}>
                           {dataItem.title}
                         </li>
-                        {!isFetchingSub ?
-                            <div className="subcategories">
-                              {console.log(currentIdCat)}
-                              {(dataItem.id === currentIdCat) ?
-                              <ul className="subcategories__list">
-                                {subCategories.map((dataItem) => (
-                                    <div
-                                        className={"subcategories__list-title"}
-                                        key={dataItem.id}>
-                                      <li id={dataItem.id}
-                                          onClick = {() => this.getProducts(dataItem.id)}>
-                                        {dataItem.title}
-                                      </li>
-                                      {!isFetchingProd ?
-                                          <div className="products">
-                                            {(dataItem.id === currentIdSub) ? <Products products={products}/> : null}
-                                            {console.log(currentIdSub)}
-                                          </div>
-                                          :
-                                          null
-                                      }
-                                    </div>
-                                ))}
-                              </ul>
-                              :
-                              null}
-                            </div>
-                            :
-                            null
-                        }
+                          {(dataItem.id === currentIdCat) ? <SubCategories subCategories={subCategories} /> : null}
                       </div>
                   ))}
                 </ul>

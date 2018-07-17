@@ -5,8 +5,6 @@ const initialState = {
   subCategories:[],
   products:[],
   isFetchingCat: true,
-  isFetchingSub: true,
-  isFetchingProd: true,
   currentIdCat:0,
   currentIdSub:0,
 };
@@ -19,10 +17,10 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {categories: action.payload.categories, isFetchingCat: false});
 
     case actions.GET_SUBCATEGORIES:
-      return Object.assign({}, state, {subCategories: action.payload.subCategories, isFetchingSub: false, currentIdCat: action.payload.currentIdCat});
+      return Object.assign({}, state, {subCategories: action.payload.subCategories, currentIdCat: action.payload.currentIdCat});
 
     case actions.GET_PRODUCTS:
-      return Object.assign({}, state, {products: action.payload.products, isFetchingProd: false, currentIdSub: action.payload.currentIdSub});
+      return Object.assign({}, state, {products: action.payload.products, currentIdSub: action.payload.currentIdSub});
 
     default:
       return state;
