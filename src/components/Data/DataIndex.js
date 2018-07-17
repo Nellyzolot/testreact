@@ -1,51 +1,36 @@
+import "regenerator-runtime/runtime";
 import React, { PropTypes, Component } from 'react'
-import axios from 'axios'
 import classNames from 'classnames'
-import SubCategories from '../../container/SubCategories'
+import Subcategories from '../../container/Subcategories'
 
 class DataIndex extends Component {
   static propTypes = {
     sid: PropTypes.number.isRequired,
     currentIdCat: PropTypes.number.isRequired,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-    subCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    subcategories: PropTypes.arrayOf(PropTypes.object).isRequired,
     getCategories: PropTypes.func.isRequired,
-    getSubCategories: PropTypes.func.isRequired,
+    getSubcategories: PropTypes.func.isRequired,
     isFetchingCat: PropTypes.bool.isRequired,
+    isFetchingSub: PropTypes.bool.isRequired,
   };
 
   componentWillMount() {
-    const { sid, getCategories } = this.props;
-    axios.get('/categories', {
-      headers: {
-        'sid': sid
-      }
-    })
-        .then(response => {
-              getCategories({categories: response.data});
-            }
-        )
+     const { sid, getCategories } = this.props;
+     console.log(getCategories);
+     getCategories( sid );
   };
 
-  getSubcategories = (id, check) => {
-    const { sid, getSubCategories } = this.props;
-    axios.get('/categories/' + id, {
-      headers: {
-        'sid': sid
-      }
-    })
-        .then(response => {
-              getSubCategories({subCategories: response.data, currentIdCat: id});
-            }
-        )
-    this.check = true;
+  getSubcategories = (id) => {
+    const { sid, getSubcategories } = this.props;
+    getSubcategories (id, sid);
   };
 
   render() {
-    const { isFetchingCat, currentIdCat, categories, subCategories } = this.props;
+    const { isFetchingCat, currentIdCat, categories, subcategories, isFetchingSub } = this.props;
     let check = false;
     return (
-        <div>
+        <div className="container-lists">
           {!isFetchingCat ?
               <div className="categories">
                 <ul className="categories__list">
@@ -57,7 +42,12 @@ class DataIndex extends Component {
                             onClick = {() => this.getSubcategories(dataItem.id, check)}>
                           {dataItem.title}
                         </li>
-                          {(dataItem.id === currentIdCat) ? <SubCategories subCategories={subCategories} /> : null}
+                        {!isFetchingSub ?
+                            <div>
+                          {(dataItem.id === currentIdCat) ? <Subcategories subcategories={subcategories} /> : null}
+                            </div>
+                          :
+                            null}
                       </div>
                   ))}
                 </ul>

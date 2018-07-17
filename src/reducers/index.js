@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
 import loginReducer from './loginReducer'
-import dataReducer from './dataReducer'
+import categoriesReducer from './categoriesReducer'
+import subcategoriesReducer from './subcategoriesReducer'
+import productReducer from './productReducer'
 
 export default combineReducers({
   loginReducer,
-  dataReducer
+  categoriesReducer,
+  subcategoriesReducer,
+  productReducer,
 })

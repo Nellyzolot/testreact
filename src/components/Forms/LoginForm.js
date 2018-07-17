@@ -20,6 +20,9 @@ class LoginForm extends Component {
         setSid({sid: response.data.sid})
       }
     )
+      .catch(() => {
+        alert('Введите логин и пароль, указанные при регистрации');
+      });
 
   };
 

@@ -1,20 +1,21 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getCategories, getSubCategories} from '../actions/DataAction';
+import {getCategories} from '../actions/CategoriesAction';
+import {getSubcategories} from '../actions/SubcategoriesAction';
 import DataIndex from '../components/Data/DataIndex';
 
 const mapStateToProps = state => ({
   sid: state.loginReducer.sid,
-  currentIdCat:state.dataReducer.currentIdCat,
-  currentIdSub:state.dataReducer.currentIdSub,
-  categories: state.dataReducer.categories,
-  subCategories:state.dataReducer.subCategories,
-  isFetchingCat: state.dataReducer.isFetchingCat,
+  categories: state.categoriesReducer.categories,
+  isFetchingCat: state.categoriesReducer.isFetchingCat,
+  subCategories: state.subcategoriesReducer.subCategories,
+  currentIdCat: state.subcategoriesReducer.currentIdCat,
+  isFetchingSub: state.subcategoriesReducer.isFetchingCat,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getCategories,
-  getSubCategories,
+  getSubcategories
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataIndex);

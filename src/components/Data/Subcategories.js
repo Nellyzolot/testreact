@@ -3,33 +3,25 @@ import axios from 'axios';
 import Products from './Products'
 import classNames from "classnames";
 
-class SubCategories extends Component {
+class Subcategories extends Component {
   static propTypes = {
     sid: PropTypes.number.isRequired,
+    subcategories: PropTypes.arrayOf(PropTypes.object).isRequired,
     currentIdSub: PropTypes.number.isRequired,
-    subCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
     getProducts: PropTypes.func.isRequired,
   };
 
   getProducts = (id) => {
     const { sid, getProducts } = this.props;
-    axios.get('/products/' + id, {
-      headers: {
-        'sid': sid
-      }
-    })
-        .then(response => {
-              getProducts({products: response.data, currentIdSub: id});
-            }
-        )
+    getProducts(id, sid);
   };
 
   render() {
-    const { subCategories, currentIdSub, products } = this.props;
+    const { subcategories, currentIdSub, products } = this.props;
     return <div className="subcategories">
       <ul className="subcategories__list">
-        {subCategories.map((dataItem) => (
+        {subcategories.map((dataItem) => (
             <div
                 className={classNames("subcategories__list-title", { "subcategories__list-title_active" : dataItem.id === currentIdSub})}
                 key={dataItem.id}>
@@ -45,4 +37,4 @@ class SubCategories extends Component {
   }
 }
 
-export default SubCategories;
+export default Subcategories;

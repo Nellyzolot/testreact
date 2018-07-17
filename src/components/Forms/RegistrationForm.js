@@ -4,19 +4,18 @@ import ReactDOM from 'react-dom';
 
 class RegForm extends Component {
 
-  constructor(props) {
-      super(props);
-  }
-
   handleSubmit = event => {
       event.preventDefault();
-      this.disableInput();
+    if (ReactDOM.findDOMNode(this.refs.login).value !== '' && ReactDOM.findDOMNode(this.refs.password).value !== '') {
+     this.disableInput();
 
       axios.post('/signup', {
         login: ReactDOM.findDOMNode(this.refs.login).value,
         password: ReactDOM.findDOMNode(this.refs.password).value
       })
-  }
+    }
+    else alert("Поля \"Логин\" или \"Пароль\" не могут быть пустыми!");
+  };
 
   disableInput(){
     ReactDOM.findDOMNode(this.refs.login).disabled = true;
@@ -34,6 +33,7 @@ class RegForm extends Component {
                 defaultValue=''
                 ref='login'
                 placeholder='Введите логин'
+                required='true'
             />
           </div>
           <div className='textfield'>
@@ -43,6 +43,7 @@ class RegForm extends Component {
                 defaultValue=''
                 ref='password'
                 placeholder='Введите пароль'
+                required
             />
           </div>
           <button className='signup-button button' onClick={this.handleSubmit} >Зарегистрироваться</button>
