@@ -79,6 +79,10 @@ body {
     color: #fff;
 }
 
+.container-lists {
+    margin-top: 50px;
+}
+
 ul {
     list-style: none;
 }
@@ -94,6 +98,7 @@ li {
 
 .categories__list-title {
     position: relative;
+    width: 180px;
 }
 
 .categories__list-title > li {

@@ -1,10 +1,9 @@
 import * as actions from '../constants/Data'
-import {ROUTING} from "../constants/Routing";
 
 export function getCategories(payload) {
   return (dispatch) => {
     dispatch({
-      type: actions.GET_CATEGORIES,
+      type: actions.GET_CATEGORIES_SUCCESS,
       payload: {
         categories: payload.categories,
       }
@@ -12,12 +11,12 @@ export function getCategories(payload) {
   }
 }
 
-export function getSubCategories(payload) {
+export function getSubcategories(payload) {
   return (dispatch) => {
     dispatch({
-      type: actions.GET_SUBCATEGORIES,
+      type: actions.GET_SUBCATEGORIES_SUCESS,
       payload: {
-        subCategories: payload.subCategories,
+        subcategories: payload.subcategories,
         currentIdCat: payload.currentIdCat,
       }
     });
@@ -27,7 +26,7 @@ export function getSubCategories(payload) {
 export function getProducts(payload) {
   return (dispatch) => {
     dispatch({
-      type: actions.GET_PRODUCTS,
+      type: actions.GET_PRODUCTS_SUCESS,
       payload: {
         products: payload.products,
         currentIdSub: payload.currentIdSub,
