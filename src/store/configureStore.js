@@ -1,15 +1,13 @@
-import { createStore, applyMiddleware } from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import rootReducer from '../reducers'
-import { redirect } from '../middlewares/redirect'
-import { createLogger } from 'redux-logger'
+import {redirect} from '../middlewares/redirect'
 import thunk from 'redux-thunk'
 
-export default function configureStore (initialState) {
-  const logger = createLogger();
+export default function configureStore(initialState) {
   const store = createStore(
       rootReducer,
       initialState,
-      applyMiddleware(thunk, logger, redirect))
+      applyMiddleware(thunk, redirect))
 
   return store
 }

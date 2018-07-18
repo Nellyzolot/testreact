@@ -5,6 +5,7 @@ import LoginForm from '../components/Forms/LoginForm';
 
 const mapStateToProps = state => ({
   sid: state.loginReducer.sid,
+  error: state.loginReducer.error,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

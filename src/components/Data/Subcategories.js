@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import axios from 'axios';
 import Products from './Products'
-import classNames from "classnames";
+import classNames from 'classnames';
 
 class Subcategories extends Component {
   static propTypes = {
@@ -13,27 +12,29 @@ class Subcategories extends Component {
   };
 
   getProducts = (id) => {
-    const { sid, getProducts } = this.props;
+    const {sid, getProducts} = this.props;
     getProducts(id, sid);
   };
 
   render() {
-    const { subcategories, currentIdSub, products } = this.props;
-    return <div className="subcategories">
-      <ul className="subcategories__list">
-        {subcategories.map((dataItem) => (
-            <div
-                className={classNames("subcategories__list-title", { "subcategories__list-title_active" : dataItem.id === currentIdSub})}
-                key={dataItem.id}>
-              <li id={dataItem.id}
-                  onClick = {() => this.getProducts(dataItem.id)}>
-                {dataItem.title}
-              </li>
-                {(dataItem.id === currentIdSub) ? <Products products={products}/> : null}
-            </div>
-        ))}
-      </ul>
-    </div>
+    const {subcategories, currentIdSub, products} = this.props;
+    return (
+        <div className='subcategories'>
+          <ul className='subcategories__list'>
+            {subcategories.map((dataItem) => (
+                <div
+                    className={classNames('subcategories__list-title', {'subcategories__list-title_active': dataItem.id === currentIdSub})}
+                    key={dataItem.id}>
+                  <li id={dataItem.id}
+                      onClick={() => this.getProducts(dataItem.id)}>
+                    {dataItem.title}
+                  </li>
+                  {(dataItem.id === currentIdSub) ? <Products products={products}/> : null}
+                </div>
+            ))}
+          </ul>
+        </div>
+    );
   }
 }
 

@@ -11,7 +11,7 @@ const initialState = {
 export default handleActions({
   [actions.GET_SUBCATEGORIESS_REQUEST]: state => ({
     ...state,
-    currentIdCat:0,
+    currentIdCat: 0,
     isFetchingSub: true,
     error: {},
   }),
@@ -26,7 +26,7 @@ export default handleActions({
 
   [actions.GET_SUBCATEGORIESS_FAIL]: (state, action) => ({
     ...state,
-    currentIdCat:0,
+    currentIdCat: 0,
     isFetchingSub: true,
     error: action.payload.error,
   }),
