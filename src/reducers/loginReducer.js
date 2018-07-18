@@ -1,19 +1,25 @@
-import {
-  SET_SID
-} from '../constants/Login'
+import {handleActions} from 'redux-actions';
+import * as actions from '../constants/Login';
 
 const initialState = {
   sid: 0,
+  error: {}
 };
 
-export default function (state = initialState, action) {
+export default handleActions({
+  [actions.SET_SID_REQUEST]: state => ({
+    ...state,
+    error: {},
+  }),
 
-  switch (action.type) {
+  [actions.SET_SID_SUCCESS]: (state, action) => ({
+    ...state,
+    sid: action.payload.sid,
+    error: {},
+  }),
 
-    case SET_SID:
-      return Object.assign({}, state, {sid: action.payload.sid});
-
-    default:
-      return state;
-  }
-}
+  [actions.SET_SID_FAIL]: (state, action) => ({
+    ...state,
+    error: action.payload.error,
+  }),
+}, initialState);

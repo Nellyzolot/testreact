@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getCategories} from '../actions/CategoriesAction';
 import {getSubcategories} from '../actions/SubcategoriesAction';
-import DataIndex from '../components/Data/DataIndex';
+import Categories from '../components/Data/Categories';
 
 const mapStateToProps = state => ({
   sid: state.loginReducer.sid,
@@ -18,4 +18,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getSubcategories
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

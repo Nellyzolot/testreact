@@ -24,8 +24,8 @@ export const getProducts = (id, sid) => async (dispatch) => {
       }
     });
     dispatch(getProductsSuccess({
-        products: response.data,
-        currentIdSub: id,
+      products: response.data,
+      currentIdSub: id,
     }));
   } catch (error) {
     dispatch(getProductsFail(error));
